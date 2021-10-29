@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-geoserver
+spec:
+  selector:
+    matchLabels:
+      name: my-geoserver
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: my-geoserver
+    spec:
+      volumes:
+      - name: geoserver-pv
+        persistentVolumeClaim:
+          claimName: geoserver-pvc
+      containers:
+      - name: my-geoserver
+        image: geonode/geoserver
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: geoserver-pv
+          mountPath: /geoserver_data/data

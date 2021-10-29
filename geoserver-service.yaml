@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-geoserver
+  labels:
+    name: my-geoserver
+spec:
+  type: ClusterIP
+  selector:
+    name: my-geoserver
+  ports:
+  - port: 8080
+    protocol: TCP

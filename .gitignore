@@ -1,0 +1,5 @@
+# The directory below is used to contain the data downloaded from
+# https://build.geo-solutions.it/geonode/geoserver/latest/
+@ based on instructions at https://hub.docker.com/r/geonode/geoserver
+
+geoserver/

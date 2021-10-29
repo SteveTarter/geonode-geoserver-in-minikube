@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: geoserver
+  labels:
+    run: geoserver
+spec:
+  volumes:
+  - name: geoserver-pv
+    persistentVolumeClaim:
+      claimName: geoserver-pvc
+  containers:
+  - name: geoserver
+    image: geonode/geoserver
+    ports:
+    - containerPort: 8080
+    volumeMounts:
+    - name: geoserver-pv
+      mountPath: /geoserver_data/data

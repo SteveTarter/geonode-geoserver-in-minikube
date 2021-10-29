@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu
+spec:
+  volumes:
+  - name: geoserver-pv
+    persistentVolumeClaim:
+      claimName: geoserver-pvc
+  containers:
+  - name: ubuntu
+    image: ubuntu
+    volumeMounts:
+    - name: geoserver-pv
+      mountPath: /mnt/data
