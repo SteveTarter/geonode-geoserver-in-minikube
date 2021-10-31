@@ -16,16 +16,18 @@ Create a directory named "geoserver" where this repository was cloned and unzip 
 
 Next, edit the following line in geoserver-pv.yaml to correspond to where your geoserver data is:
 
-    path: "/hosthome/tarter/GIS/geonode/geonode-geoserver-in-minikube/geoserver/data_osgeolive/"
+    path: "/hosthome/tarter/GIS/geonode/geoserver-in-minikube/geoserver/data_osgeolive/"
 
 The above line would mount the following host firectory:
 
-    /home/tarter/GIS/geonode/geonode-geoserver-in-minikube/geoserver/data_osgeolive/
+    /home/tarter/GIS/geonode/geoserver-in-minikube/geoserver/data_osgeolive/
     
 Now, we're ready to set up minikube.  Set the defaults to reserve a bit more cpu and memory, and change default driver to virtualbox:
 
     minikube config set driver virtualbox
-    minikube start --cpus 4 --memory 8192
+    minikube config set cpus 4
+    minikube config set memory 8192
+    minikube start
     
 Enable the ingress addon to provide the interface with the outside world.
 
@@ -64,3 +66,7 @@ Next, add an entry in your /etc/hosts file to point to the dashboard service and
     192.168.99.110  geoserver.info dashboard.info
 
 Once this is complete, the kibernetes dashboard will be accessible at http://dashboard.info/ and the Geoserver instance will be accessible at http://geoserver.info/geoserver .
+
+Once on the geoserver dashboard, update the base URL or all of the layer previews will be filled with broken links.  Find this from the geoserver menu on the left choose Settings->Global, then change Proxy Base URL on that page to be: "http://geoserver.info/geoserver".
+
+You should probably also change the admin password.  You may access this by going to Security -> Users, Groups, Roles.  Once on that page, click on the Users/Groups tab, then click on the admin user.  On the page that is then brought up, you'll be offered the chance the change the password. 
