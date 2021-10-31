@@ -1,4 +1,4 @@
-# geonode-geoserver-in-minikube
+geoserver-in-minikube
 Configuration files needed to run Geoserver in Minikube
 
 ## Description
