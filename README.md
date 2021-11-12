@@ -3,35 +3,38 @@ Configuration files needed to run Geoserver in Minikube
 
 ## Description
 This project runs the GIS server Geoserver within the Minikube Kubernetes environment.  
-The main ingredient is provided by the Dockerized Geoserver created by the fine folks at Geonode:
-https://hub.docker.com/r/geonode/geoserver .
-
+The main ingredient is provided by the Dockerized Geoserver created by the fine folks at ThinkWhere:
+https://github.com/thinkWhere/GeoServer-Docker.
+The above project has been forked to add a few plugins, and adjust
 
 ## Setup After Cloning
-Dowload the latest data-2.xx.x.zip file from https://build.geo-solutions.it/geonode/geoserver/latest/ .
-Create a directory named "geoserver" where this repository was cloned and unzip the data there:
+Create a directory that will host the geoserver data, if you don't have one yet.  If geoserver finds it empty, it will populate this directory with startup data.  I created a directory to hold this in my home directory (my username is tarter):
 
-    mkdir geoserver
-    unzip ~/Downloads/data-2.15.1-osgeolive.zip -d ./geoserver/
+    mkdir ~/geoserver_data
 
 Next, edit the following line in geoserver-pv.yaml to correspond to where your geoserver data is:
 
-    path: "/hosthome/tarter/GIS/geonode/geoserver-in-minikube/geoserver/data_osgeolive/"
+    path: "/hosthome/tarter/geoserver_data/"
 
-The above line would mount the following host firectory:
+The above line would mount the following host directory:
 
-    /home/tarter/GIS/geonode/geoserver-in-minikube/geoserver/data_osgeolive/
+    /home/tarter/geoserver_data/
     
-Now, we're ready to set up minikube.  Set the defaults to reserve a bit more cpu and memory, and change default driver to virtualbox:
+Now, we're ready to set up minikube.  Set the defaults to reserve a bit more cpu and memory, and change default driver to virtualbox.  My box has 8 CPUs and 64 GB, so my values may be a bit higher than average, but you need to give Geoserver room to run:
 
     minikube config set driver virtualbox
     minikube config set cpus 4
-    minikube config set memory 8192
+    minikube config set memory 24576
     minikube start
     
 Enable the ingress addon to provide the interface with the outside world.
 
     minikube addons enable ingress
+
+Enable the metrics scaper, which allows showing resource usage in the dashboard.
+
+
+    minikube addons enable metrics-server
 
 Start the dashboard so that the dashboard elements will be installed.
 

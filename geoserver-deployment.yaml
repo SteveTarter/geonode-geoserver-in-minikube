@@ -18,9 +18,9 @@ spec:
           claimName: geoserver-pvc
       containers:
       - name: my-geoserver
-        image: geonode/geoserver
+        image: stevetarter/geoserver
         ports:
         - containerPort: 8080
         volumeMounts:
         - name: geoserver-pv
-          mountPath: /geoserver_data/data
+          mountPath: /opt/geoserver/data_dir
