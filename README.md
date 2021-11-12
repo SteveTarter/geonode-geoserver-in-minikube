@@ -5,7 +5,7 @@ Configuration files needed to run Geoserver in Minikube
 This project runs the GIS server Geoserver within the Minikube Kubernetes environment.  
 The main ingredient is provided by the Dockerized Geoserver created by the fine folks at ThinkWhere:
 https://github.com/thinkWhere/GeoServer-Docker.
-The above project has been forked to add a few plugins, and adjust
+The above project has been forked to add a few plugins, and adjust how the image is started.
 
 ## Setup After Cloning
 Create a directory that will host the geoserver data, if you don't have one yet.  If geoserver finds it empty, it will populate this directory with startup data.  I created a directory to hold this in my home directory (my username is tarter):
