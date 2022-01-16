@@ -18,7 +18,7 @@ spec:
           claimName: geoserver-pvc
       containers:
       - name: my-geoserver
-        image: stevetarter/geoserver
+        image: stevetarter/geoserver:2.19.4-20220109T171432
         ports:
         - containerPort: 8080
         volumeMounts:

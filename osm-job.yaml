@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: osm-job
+spec:
+  template:
+    spec:
+      volumes:
+      - name: osm-pv
+        persistentVolumeClaim:
+          claimName: osm-pvc
+      containers:
+      - name: osm-job
+        image: stevetarter/osm2pgsql:1.5.1-20220109T171020
+        command: ["osm2pgsql"]
+        args: ["-c", "-d", "osm", "-U", "postgres", "-H", "my-postgresql.default.svc.cluster.local", "-S", "/mnt/osm-data/default.style", "/mnt/osm-data/texas-latest.osm.pbf"]
+        env:
+        - name: PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: my-postgresql
+              key: postgresql-password
+        volumeMounts:
+        - name: osm-pv
+          mountPath: /mnt/osm-data
+      restartPolicy: Never
+  backoffLimit: 4
+
+
